@@ -14,32 +14,50 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar position-fixed mx-5 my-4 navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="./index.html">Home</a>
+            <a class="navbar-brand d-flex justify-content-center align-items-center" href="./index.html">
+                <img class="logo" src="./img/logo_meteo.png" alt="">
+                <p class="home d-flex justify-content-center">Home</p>
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="./setting.html">Settings</a>
+                        <a class="navbar-brand d-flex align-items-center active" aria-current="page" href="./setting.html">
+                            <p class="home">Settings</p>
+                        </a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
     
-    <h1>Settings</h1>
+    <div class="container py-5 px-5 padding_home">
+        <div class="d-flex align-items-center py-1">
+            <img class="logo" src="./img/settings.png" alt="">
+            <h1>Settings</h1>
 
-    <select id="temp_option" class="form-select" aria-label="Default select example">
-        <!-- <option value='0' >Celsius</option>
-        <option value="1">Fahrenheit</option> -->
-    </select>
-
-    <!-- PULSANTE SALVA -->
-    <button id="save" onclick="save()" type="button" class="btn btn-primary">Save</button>
-
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <select id="temp_option" class="form-select" aria-label="Default select example">
+                    <!-- <option value='0' >Celsius</option>
+                    <option value="1">Fahrenheit</option> -->
+                </select>
+                
+                <!-- PULSANTE SALVA -->
+                
+            </div>
+            <div class="col-6">
+                
+                <button id="save" onclick="save()" type="button" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+    
     <!-- bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     

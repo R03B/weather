@@ -66,6 +66,7 @@ let col_card_el = document.querySelectorAll('.col_card_el')
 
 
 let card_add = document.querySelector('#card_add')
+
 let cards = document.querySelector('#cards')
 
 // TEST LOCAL STORAGE
@@ -127,9 +128,9 @@ fetch(apiUrl)
                     FirstMeteoTemp.innerHTML=data.current.temp_c
                 }
                 
-                let MeteoIco = document.createElement('img')
+                let MeteoIco = document.querySelector('#FirstMeteoIco')
                 MeteoIco.src=data.current.condition.icon
-                FirstMeteoIco.appendChild(MeteoIco)
+                // FirstMeteoIco.appendChild(MeteoIco)
             })
         }
     });
@@ -140,22 +141,31 @@ fetch(apiUrl)
 
 // card add
 
+// PRE ADD
 function pre_add() {
     console.log('pre add activate');
-    card_add.innerHTML='<div class="card" style="width: 18rem;"><div class="card-body"><input type="text" class="form-control" id="new_city_name" placeholder="" aria-label="Username" aria-describedby="basic-addon1"></input><button onclick="add()" type="button" class="btn btn-primary">add</button></div></div>'
+    card_add.innerHTML='<div class="card-body d-flex align-items-center btn_add_card_body"><input type="text" id="new_city_name" class="form-control" placeholder="city name" aria-label="Username" aria-describedby="basic-addon1"><button onclick="add()" type="button" class="btn_add">+</button></div>'
     let new_city_name=document.querySelector('#new_city_name')
+    let new_city
+    let btn_add = document.querySelector('.btn_add')
+    btn_add.addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            document.getElementById("myBtn").click();
+        }
+    });
 }
 
-let new_city
 
+// ADD
 function add() {
     
     new_city=new_city_name.value
     
     let new_card = document.createElement('div')
-    new_card.classList.add('col-4')
+    new_card.classList.add('col-md-4','col-sm-12')
     new_card.classList.add('col_card_el')
-    new_card.innerHTML='<div class="card card_el '+'id_'+new_city+'" style="width: 18rem;"><div class="card-body '+'id_body_'+new_city+' card_body_el"></div></div>'
+    new_card.innerHTML='<div class="card_el '+'id_'+new_city+'"><div class="card-body '+'id_body_'+new_city+' card_body_el"></div></div>'
     
     cards.appendChild(new_card)
     
@@ -201,7 +211,7 @@ function add() {
         let new_card_temp=document.createElement('p')
         new_card_temp.innerHTML=data
         new_card_temp.classList.add('card_el_temp')
-
+        
         let remove_button=document.createElement('span')
         remove_button.classList.add('remove_button_span')
         remove_button.innerHTML='<button onclick="remove()" type="button" class="btn btn-danger">remove</button>'
@@ -220,11 +230,13 @@ function add() {
             el.appendChild(new_card_name)
             el.appendChild(new_card_region)
             el.appendChild(new_card_country)
-            el.appendChild(new_card_text)
-            el.appendChild(new_card_ico)
             el.appendChild(new_card_temp)
+            let status=document.createElement('span')
+            status.classList.add('d-flex','align-items-center')
+            status.appendChild(new_card_text)
+            status.appendChild(new_card_ico)
+            el.appendChild(status)
             el.appendChild(remove_button)
-            
         });
         new_city= ''
         
@@ -233,23 +245,23 @@ function add() {
         card_body_el=document.querySelectorAll('.card_body_el')
         let remove_button_span= document.querySelectorAll('.remove_button_span')
         col_card_el = document.querySelectorAll('.col_card_el')
-
+        
         card_el.forEach(function(el,index) {
         });
         
         for (let index = 0; index < card_el.length; index++) {
             col_card_el[index].id= 'card_'+index
             let remove_button_span_supp=remove_button_span[index]
-
+            
             console.log(card_body_el[index]);
             console.log(remove_button_span_supp);
-
+            
             card_body_el[index].removeChild(remove_button_span_supp)
             remove_button_span[index].innerHTML='<button onclick="remove('+`'card_`+index+`'`+')" type="button" class="btn btn-danger">remove</button>'
             card_body_el[index].appendChild(remove_button_span[index])
             
         }
-
+        
         // card container local storage update
         card_container= document.querySelector('#card_container')
         localStorage.setItem("card_container", card_container.innerHTML);
@@ -257,7 +269,7 @@ function add() {
     
     
     cards.removeChild(card_add)
-    card_add.innerHTML='<div class="card" style="width: 18rem;"><div class="card-body"><button onclick="pre_add()" type="button" class="btn btn-primary">add</button></div></div>'
+    card_add.innerHTML='<div class="card-body d-flex justify-content-center btn_card_body"><button onclick="pre_add()" type="button" class="btn_pre_add">+</button></div>'
     cards.appendChild(card_add)
 }
 
@@ -269,7 +281,7 @@ function remove(x) {
             cards.removeChild(el)
         }
     });
-
+    
     // card container local storage update
     card_container= document.querySelector('#card_container')
     localStorage.setItem("card_container", card_container.innerHTML);
