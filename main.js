@@ -36,7 +36,7 @@ function test(params) {
     console.log(params);
 }
 
-localStorage.clear()
+// localStorage.clear()
 
 // card container
 let supp_x=1
